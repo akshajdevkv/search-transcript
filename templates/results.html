@@ -1,0 +1,69 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{query}}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+ 
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+</head>
+<body id="results-page">
+    <header></header>
+</body>
+<header id="results-header">
+    <a href="/"><img src="{{ url_for('static',filename='googlelogo.png')}}" alt=""> </a>  
+    <form action="/search">
+        <input type="text" name="q" value="{{query}}"  id="results-search" >
+    </form> 
+</header>
+    <main>
+         
+        {%if data|length == 0%}
+        {%set suggestion_word = suggestion(query) %}            
+            <div id="no-results">
+                {%if suggestion_word%}
+                <p>Do you mean <a id="suggestion-word"  href="/search?q={{suggestion_word}}">{{suggestion_word}}</a>?</p>
+                {%endif%}
+                <p>No results were found.</p>
+                <p>Your search - <strong>{{query}}</strong>- did not match any YouTube Video Title or Channel Name</p>
+                <p>Suggestions:</p>
+                <ul >
+                    <li>Make sure that all words are spelled correctly.</li>
+                    <li>Use  different keywords</li>
+                </ul>
+                
+            </div>
+        {%endif%}
+        {%if data|length > 0 %}
+        {% for content in data%}
+         
+        <section class="query-results">
+            
+            <a href="/transcription/{{content['id']}}" class = "result-link">{{content["title"]}}</a>
+            <div class = "result-info">
+                <img src="{{content['thumbnail']}}" alt="">
+                <div class="results-description">
+                {%if content["transcription"]|length > 150 %}
+                    <p>{{content["transcription"][:150]+"..." }}</p>
+                {%endif%}
+                {%if content["transcription"]|length < 150 %}
+                <p>{{content["transcription"] }}</p>
+                
+                {%endif%}
+            <div class="description-more">
+                <p>{{content["publishedAt"]}}</p>
+                <p>Published by {{content["channelTitle"]}}</p>
+            </div>
+            </div>
+            </div>
+        
+        </section>
+        
+        {%endfor%}
+        {%endif%}
+    </main>
+</body>
+</html>

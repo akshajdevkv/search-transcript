@@ -1,0 +1,31 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+ 
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab+Highlight:wght@700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap" rel="stylesheet">
+</head>
+<body id="transcription-page">
+    <article class="transcription-article">
+        <h1>{{content["title"]}}</h1>
+        <p class="transcription-subtitle">A Video by {{content["channelTitle"]}}</p>
+        <iframe src="https://www.youtube.com/embed/{{content['id']}}" frameborder="0"></iframe>
+        <div class="transcription-description">
+            
+            <p>{{content["publishedAt"]}}  •  {{content["viewCount"]}} views</p>
+       
+        </div>
+        <div class="transcription-paragraph">
+            <p>{{content["transcription"]}}</p>
+        </div>
+    </article>
+</body>
+</html>
