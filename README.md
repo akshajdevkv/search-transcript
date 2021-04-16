@@ -1,2 +1,2 @@
-# youtube-transcripted
-A search engine for finding the Transcript of Videos from Youtube's Educational channels
+# search-transcript
+A search engine for finding the Transcripts of Videos from Youtube's Educational channels
