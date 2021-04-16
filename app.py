@@ -11,6 +11,11 @@ def get_suggestions(query):
         return soup.find("div",id="taw").find("b").text
     except:
         return False
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return "404 page not found GET LOST!!! 😆",404
+
 @app.route("/")
 def home(): 
     return render_template("index.html")
@@ -46,4 +51,5 @@ def transcription(video_id):
     
 
 
- 
+if __name__ =="__main__":
+    app.run()
